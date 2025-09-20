@@ -1,0 +1,22 @@
+services:
+  main-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.main
+    container_name: main_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  model-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.model
+    container_name: model_api
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    command: uvicorn model_api:app --host 0.0.0.0 --port 8001 --reload
